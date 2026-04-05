@@ -155,4 +155,156 @@ Header: role = ADMIN
 * Simple and maintainable code structure
 
 ---
+## 🧪 API Examples (Postman Results)
+
+### 🔹 1. Create User
+
+**Request**
+POST /users
+
+```json
+{
+  "name": "Admin",
+  "email": "admin@test.com",
+  "role": "ADMIN",
+  "active": true
+}
+```
+
+**Response**
+
+```json
+{
+    "active": true,
+    "email": "admin@test.com",
+    "id": 1,
+    "name": "Admin",
+    "role": "ADMIN"
+}
+```
+
+---
+
+### 🔹 2. Create Record
+
+**Request**
+POST /records
+Header: role = ADMIN
+
+```json
+{
+  "amount": 5000,
+  "type": "INCOME",
+  "category": "Salary",
+  "date": "2026-04-05",
+  "description": "Monthly salary",
+  "userId": 1
+}
+```
+
+**Response**
+
+```json
+{
+    "amount": 5000.0,
+    "category": "Salary",
+    "date": "2026-04-05",
+    "description": "Monthly salary",
+    "id": 1,
+    "type": "INCOME",
+    "userId": 1
+}
+```
+
+---
+
+### 🔹 3. Get All Records
+
+**Request**
+GET /records
+
+**Response**
+
+```json
+[
+  {
+        "amount": 5000.0,
+        "category": "Salary",
+        "date": "2026-04-05",
+        "description": "Monthly salary",
+        "id": 1,
+        "type": "INCOME",
+        "userId": 1
+    }
+]
+```
+
+---
+
+### 🔹 4. Update Record
+
+**Request**
+PUT /records/1
+Header: role = ADMIN
+
+```json
+{
+  "amount": 7000,
+  "type": "INCOME",
+  "category": "Updated Salary",
+  "userId": 1
+}
+```
+
+**Response**
+
+```json
+{
+  "amount": 7000,
+  "category": "Updated Salary"
+}
+```
+
+---
+
+### 🔹 5. Delete Record
+
+**Request**
+DELETE /records/1
+Header: role = ADMIN
+
+**Response**
+
+```text
+Deleted successfully
+```
+
+---
+
+### 🔹 6. Summary API
+
+**Request**
+GET /summary/net-balance
+
+**Response**
+
+```text
+3000
+```
+
+---
+
+### 🔹 7. Access Control (Failure Case)
+
+**Request**
+POST /records
+Header: role = VIEWER
+
+**Response**
+
+```json
+{
+  "error": "Access Denied"
+}
+```
 
